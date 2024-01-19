@@ -14,9 +14,28 @@ resource "aws_vpc" "mypotal_vpc" {
 
 resource "aws_subnet" "my_subnet" {
   vpc_id                  = aws_vpc.mypotal_vpc.id
-  cidr_block              = "10.0.0.32/28"
+  cidr_block              = "10.0.0.0/28"
   map_public_ip_on_launch = true
 }
+
+resource "aws_subnet" "private-db1" {
+  vpc_id            = aws_vpc.mypotal_vpc.id
+  cidr_block        = "10.0.0.16/28"
+  availability_zone = "ap-northeast-1a"
+  tags = {
+    Name = "private-db1"
+  }
+}
+
+resource "aws_subnet" "private-db2" {
+  vpc_id            = aws_vpc.mypotal_vpc.id
+  cidr_block        = "10.0.0.32/28"    # 別のCIDRブロックを指定
+  availability_zone = "ap-northeast-1c" # 別のAZを指定
+  tags = {
+    Name = "private-db2"
+  }
+}
+
 
 resource "aws_internet_gateway" "my_gw" {
   vpc_id = aws_vpc.mypotal_vpc.id

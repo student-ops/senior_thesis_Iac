@@ -30,6 +30,12 @@ resource "aws_instance" "secure_prog" {
 
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name
 
+  user_data = <<-EOF
+            #!/bin/bash
+            apt-get update -y
+            apt-get upgrade -y
+            EOF
+
   root_block_device {
     volume_size = 10
     volume_type = "gp2"
