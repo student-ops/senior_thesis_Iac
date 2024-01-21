@@ -4,8 +4,9 @@ variable "awsprops" {
     region = "ap-northeast-1"
     # ami        = "ami-04beabd6a4fb6ab6f" # AMAZON LINUX 2
     # ami          = "ami-0fda573abc329ed59" # ECS optimized AMAZON LINUX 2023
-    ami          = "ami-07c589821f2b353aa" # UBUNTU 22.04
-    prod_itype   = "t4g.small"
+    ami = "ami-07c589821f2b353aa" # UBUNTU 22.04 for x86_64
+    # ami          = "ami-01044a7484292fef7" # UBUNTU 22.04 for aarch
+    prod_itype   = "t3.small"
     publicip     = true
     keyname      = "senior_thesis"
     secgroupname = "mypotal_vpc_sg"
@@ -27,7 +28,7 @@ locals {
 
 resource "aws_instance" "k3s_server" {
   ami                         = var.awsprops["ami"]
-  instance_type               = "t4g.medium"
+  instance_type               = "t3.medium"
   subnet_id                   = aws_subnet.my_subnet.id
   associate_public_ip_address = var.awsprops["publicip"]
   key_name                    = aws_key_pair.my_key.key_name
