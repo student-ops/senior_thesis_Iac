@@ -1,5 +1,5 @@
 variable "instancename" {
-  default = "myPotal"
+  default = "Master"
 }
 
 variable "public_key_path" {
@@ -35,7 +35,6 @@ resource "aws_subnet" "private-db2" {
     Name = "private-db2"
   }
 }
-
 
 resource "aws_internet_gateway" "my_gw" {
   vpc_id = aws_vpc.mypotal_vpc.id

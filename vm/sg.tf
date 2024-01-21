@@ -23,12 +23,7 @@ resource "aws_security_group" "mypotal_vpc_sg" {
     to_port     = 8080
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 8081
-    protocol    = "tcp"
-    to_port     = 8081
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
   ingress {
     from_port   = 443
     protocol    = "tcp"
@@ -41,6 +36,41 @@ resource "aws_security_group" "mypotal_vpc_sg" {
     to_port     = 5555
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ingress {
+    from_port   = 2379
+    protocol    = "tcp"
+    to_port     = 2380
+    cidr_blocks = ["0.0.0.0/0"] # 通常はプライベートネットワーク内のみ
+  }
+
+  ingress {
+    from_port   = 8472
+    protocol    = "udp"
+    to_port     = 8472
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 6443
+    protocol    = "tcp"
+    to_port     = 6443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    from_port   = 10250
+    protocol    = "tcp"
+    to_port     = 10250
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 0
+    protocol    = "-1" # 全てのプロトコル
+    to_port     = 0
+    cidr_blocks = ["10.0.0.0/28"] # サブネットのCIDRを指定
+  }
+
 
   egress {
     from_port   = 0
