@@ -10,8 +10,8 @@ resource "aws_db_instance" "test-db" {
   identifier             = "test-db"
   allocated_storage      = 10
   storage_type           = "gp2"
-  engine                 = "mysql"
-  engine_version         = "8.0.34"
+  engine                 = "postgres"
+  engine_version         = "14.10"
   instance_class         = "db.t3.micro"
   db_name                = "testdb"
   username               = "test"
